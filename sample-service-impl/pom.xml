@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c)
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>sample</artifactId>
+        <groupId>com.sample</groupId>
+        <version>1.1.0-1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>sample-service-impl</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.sample</groupId>
+            <artifactId>sample-service-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sample</groupId>
+            <artifactId>sample-external-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sample</groupId>
+            <artifactId>sample-repository</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sample</groupId>
+            <artifactId>sample-repository</artifactId>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
