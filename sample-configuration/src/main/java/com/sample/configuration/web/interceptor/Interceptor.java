@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  * Created by jugalkishorsahu on Feb, 2018
  */
 @AllArgsConstructor
-public class MandatoryParameterInterceptor extends HandlerInterceptorAdapter {
+public class Interceptor extends HandlerInterceptorAdapter {
 
   private Tracer tracer;
 

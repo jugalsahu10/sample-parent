@@ -4,7 +4,7 @@
 
 package com.sample.configuration.web;
 
-import com.sample.configuration.web.interceptor.MandatoryParameterInterceptor;
+import com.sample.configuration.web.interceptor.Interceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.context.annotation.Bean;
@@ -46,8 +46,8 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
         "/swagger-resources/configuration/ui");
     registry.addRedirectViewController("/docs/swagger-resources/configuration/security",
         "/swagger-resources/configuration/security");
+    registry.addRedirectViewController("/docs/", "/docs/swagger-ui.html");
     registry.addRedirectViewController("/docs", "/docs/swagger-ui.html");
-
   }
 
   @Override
@@ -57,7 +57,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
 
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
-    registry.addInterceptor(new MandatoryParameterInterceptor(tracer))
-        .excludePathPatterns("/version", "/docs");
+    registry.addInterceptor(new Interceptor(tracer))
+        .excludePathPatterns("/version", "/docs/swagger-ui.html");
   }
 }

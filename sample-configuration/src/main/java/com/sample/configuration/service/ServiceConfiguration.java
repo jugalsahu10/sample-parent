@@ -11,7 +11,6 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.ReadPreference;
 import com.mongodb.WriteConcern;
-import com.sample.configuration.Utils.MessageProperties;
 import com.sample.configuration.cache.EmbeddedTomcatCacheProperties;
 import com.sample.configuration.db.mongo.MongoProperties;
 import org.apache.catalina.Context;
@@ -21,7 +20,6 @@ import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
-import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScans;
@@ -37,10 +35,7 @@ import java.net.UnknownHostException;
  * Created by jugalkishorsahu on Feb, 2018
  */
 @Configuration
-@ComponentScans({@ComponentScan(basePackages = "com.sample.repository"),
-    @ComponentScan(basePackages = "com.sample.service"),
-    @ComponentScan(basePackages = "com.sample.configuration"),
-    @ComponentScan(basePackages = "com.sample.outbound")})
+@ComponentScans({@ComponentScan(basePackages = "com.sample")})
 @EnableMongoRepositories(value = "com.sample.repository")
 @EnableMongoAuditing(auditorAwareRef = "stringAuditorAware")
 public class ServiceConfiguration {
@@ -49,12 +44,6 @@ public class ServiceConfiguration {
 
   @Autowired
   private EmbeddedTomcatCacheProperties embeddedTomcatCacheProperties;
-
-  @Autowired
-  private MessageProperties messageProperties;
-
-  @Autowired
-  private Tracer tracer;
 
   @Bean
   public MongoClient createMongo(
@@ -96,7 +85,7 @@ public class ServiceConfiguration {
     objectMapper.configure(DeserializationFeature.READ_ENUMS_USING_TO_STRING, true);
     objectMapper.configure(SerializationFeature.WRITE_ENUMS_USING_TO_STRING, true);
     objectMapper.configure(DeserializationFeature.ACCEPT_FLOAT_AS_INT, false);
-    objectMapper.addHandler(ServiceConfiguration.deserializationProblemHandler());
+    objectMapper.addHandler(deserializationProblemHandler());
     return objectMapper;
   }
 

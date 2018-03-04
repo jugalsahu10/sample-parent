@@ -20,34 +20,22 @@ public class CacheErrorHandlerImpl implements CacheErrorHandler {
 
   @Override
   public void handleCacheClearError(RuntimeException exception, Cache cache) {
-
-    LOGGER.error("#error CacheErrorHandler-handleCacheClearError" +
-        "errorMessage = {}" +
-        "exception = {}", exception.getMessage(), exception);
+    LOGGER.error("CacheClearError, message : {}", exception.getMessage(), exception);
   }
 
   @Override
   public void handleCacheEvictError(RuntimeException exception, Cache cache, Object key) {
-
-    LOGGER.error("#error CacheErrorHandler-handleCacheEvictError" +
-        "errorMessage = {}" +
-        "exception = {}", exception.getMessage(), exception);
+    LOGGER.error("CacheEvictError, message : {}", exception.getMessage(), exception);
   }
 
   @Override
   public void handleCacheGetError(RuntimeException exception, Cache cache, Object key) {
-
-    LOGGER.error("#error CacheErrorHandler-handleCacheGetError" +
-        "errorMessage = {}" +
-        "exception = {}", exception.getMessage(), exception);
+    LOGGER.error("CacheGetError, message : {}", exception.getMessage(), exception);
   }
 
   @Override
   public void handleCachePutError(RuntimeException exception, Cache cache, Object key,
       Object value) {
-
-    LOGGER.error("#error CacheErrorHandler-handleCachePutError" +
-        "errorMessage = {}" +
-        "exception = {}", exception.getMessage(), exception);
+    LOGGER.error("CachePutError, message : {}", exception.getMessage(), exception);
   }
 }
