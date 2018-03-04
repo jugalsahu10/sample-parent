@@ -21,7 +21,7 @@ public class MongoBeeConfiguration {
     Mongobee runner = new Mongobee(mongoProperties.getUri());
     runner.setDbName(mongoProperties.getDatabase());
     runner.setEnabled(true);
-    runner.setChangeLogsScanPackage("com.sample.entity.changelog");
+    runner.setChangeLogsScanPackage("com.sample.entity.mongo.changelog");
 
     return runner;
   }

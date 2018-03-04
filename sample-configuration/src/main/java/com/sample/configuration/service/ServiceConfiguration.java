@@ -4,9 +4,6 @@
 
 package com.sample.configuration.service;
 
-import com.sample.configuration.Utils.MessageProperties;
-import com.sample.configuration.cache.EmbeddedTomcatCacheProperties;
-import com.sample.configuration.db.mongo.MongoProperties;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -14,6 +11,9 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.ReadPreference;
 import com.mongodb.WriteConcern;
+import com.sample.configuration.Utils.MessageProperties;
+import com.sample.configuration.cache.EmbeddedTomcatCacheProperties;
+import com.sample.configuration.db.mongo.MongoProperties;
 import org.apache.catalina.Context;
 import org.apache.catalina.webresources.StandardRoot;
 import org.dozer.DozerBeanMapper;
@@ -58,8 +58,8 @@ public class ServiceConfiguration {
 
   @Bean
   public MongoClient createMongo(
-      org.springframework.boot.autoconfigure.mongo.MongoProperties mongoProperties, Environment environment,
-      MongoProperties sampleMongoProperties) throws UnknownHostException {
+      org.springframework.boot.autoconfigure.mongo.MongoProperties mongoProperties,
+      Environment environment, MongoProperties sampleMongoProperties) throws UnknownHostException {
 
     MongoClientOptions options =
         new MongoClientOptions.Builder().writeConcern(WriteConcern.ACKNOWLEDGED)
@@ -128,7 +128,7 @@ public class ServiceConfiguration {
     return new AuditorAware<String>() {
       @Override
       public String getCurrentAuditor() {
-        return tracer.getCurrentSpan().getBaggageItem("userName");
+        return "system";
       }
     };
   }
