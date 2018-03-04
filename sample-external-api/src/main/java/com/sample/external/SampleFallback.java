@@ -20,7 +20,7 @@ public class SampleFallback implements SampleClient {
   }
 
   @Override
-  public BaseRestResponse<SampleResponse> getFallback(String sample) {
+  public BaseRestResponse<SampleResponse> fallback(String sample) {
     return new BaseRestResponse("fallback(fallback)", "fallback(fallback)", true, null, null);
   }
 }

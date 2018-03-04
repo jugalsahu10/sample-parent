@@ -42,6 +42,16 @@ public class SampleController {
         converterService.convert(sampleService.sampleService(sample), SampleResponse.class), null);
   }
 
+  @RequestMapping(value = {"/fallback"}, method = RequestMethod.GET, produces = {
+      MediaType.APPLICATION_JSON_VALUE})
+  public BaseRestResponse<SampleResponse> fallback(@RequestParam String sample) throws Exception {
+    log.debug("get sample: {}", sample);
+
+    Thread.sleep(2000);
+    return new BaseRestResponse(true,
+        converterService.convert(sampleService.sampleService(sample), SampleResponse.class), null);
+  }
+
   @RequestMapping(value = {"/get/feign"}, method = RequestMethod.GET, produces = {
       MediaType.APPLICATION_JSON_VALUE})
   public BaseRestResponse<SampleResponse> getFeign(@RequestParam String sample) throws Exception {
@@ -50,12 +60,12 @@ public class SampleController {
     return sampleClient.get(sample);
   }
 
-  @RequestMapping(value = {"/get/fallback"}, method = RequestMethod.GET, produces = {
+  @RequestMapping(value = {"/fallback/feign"}, method = RequestMethod.GET, produces = {
       MediaType.APPLICATION_JSON_VALUE})
   public BaseRestResponse<SampleResponse> getFallback(@RequestParam String sample)
       throws Exception {
     log.debug("get sample: {}", sample);
 
-    return sampleClient.getFallback(sample);
+    return sampleClient.fallback(sample);
   }
 }

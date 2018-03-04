@@ -19,6 +19,6 @@ public interface SampleClient {
   @GetMapping(value = "/get")
   BaseRestResponse<SampleResponse> get(@RequestParam("sample") String sample);
 
-  @GetMapping(value = "/get-fallback")
-  BaseRestResponse<SampleResponse> getFallback(@RequestParam("sample") String sample);
+  @GetMapping(value = "/fallback")
+  BaseRestResponse<SampleResponse> fallback(@RequestParam("sample") String sample);
 }
