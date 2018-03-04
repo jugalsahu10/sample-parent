@@ -8,6 +8,7 @@ import com.sample.api.SampleService;
 import com.sample.api.web.helper.api.ConverterService;
 import com.sample.api.web.model.base.BaseRestResponse;
 import com.sample.api.web.model.response.SampleResponse;
+import com.sample.external.SampleClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
-@RequestMapping("/sample")
 public class SampleController {
 
   @Autowired
@@ -30,6 +30,9 @@ public class SampleController {
   @Autowired
   private ConverterService converterService;
 
+  @Autowired
+  private SampleClient sampleClient;
+
   @RequestMapping(value = {"/get"}, method = RequestMethod.GET, produces = {
       MediaType.APPLICATION_JSON_VALUE})
   public BaseRestResponse<SampleResponse> get(@RequestParam String sample) throws Exception {
@@ -37,5 +40,22 @@ public class SampleController {
 
     return new BaseRestResponse(true,
         converterService.convert(sampleService.sampleService(sample), SampleResponse.class), null);
+  }
+
+  @RequestMapping(value = {"/get/feign"}, method = RequestMethod.GET, produces = {
+      MediaType.APPLICATION_JSON_VALUE})
+  public BaseRestResponse<SampleResponse> getFeign(@RequestParam String sample) throws Exception {
+    log.debug("get sample: {}", sample);
+
+    return sampleClient.get(sample);
+  }
+
+  @RequestMapping(value = {"/get/fallback"}, method = RequestMethod.GET, produces = {
+      MediaType.APPLICATION_JSON_VALUE})
+  public BaseRestResponse<SampleResponse> getFallback(@RequestParam String sample)
+      throws Exception {
+    log.debug("get sample: {}", sample);
+
+    return sampleClient.getFallback(sample);
   }
 }

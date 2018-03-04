@@ -26,6 +26,10 @@
             <artifactId>sample-configuration</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.sample</groupId>
+            <artifactId>sample-web-model</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.netflix.feign</groupId>
             <artifactId>feign-jackson</artifactId>
             <version>8.18.0</version>

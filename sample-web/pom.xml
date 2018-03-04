@@ -30,6 +30,10 @@
         </dependency>
         <dependency>
             <groupId>com.sample</groupId>
+            <artifactId>sample-external-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sample</groupId>
             <artifactId>sample-configuration</artifactId>
         </dependency>
         <dependency>
